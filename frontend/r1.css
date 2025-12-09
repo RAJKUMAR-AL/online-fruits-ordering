@@ -1,0 +1,53 @@
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url('pexels-laura-james-6097872.jpg'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.12; 
+  z-index: -1;
+}
+
+body {
+  background-color: #f8f9fa; /* fallback light background */
+  font-family: Arial, sans-serif;
+  margin: 0; /* reset default margin */
+}
+
+.hero {
+  color: white;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+}
+
+.hero h1 {
+  font-size: 4rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.product-card img {
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  width: 100%;
+}
+
+footer {
+  background-color: #343a40;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.9);
+}

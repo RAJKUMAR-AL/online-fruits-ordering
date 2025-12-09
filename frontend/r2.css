@@ -1,0 +1,70 @@
+body {
+  background-image: url('fru.jpg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  margin: 0; 
+  font-family: Arial, sans-serif; /* Add a clean default font */
+  color: #333; /* Consistent text color */
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px; /* Add some breathing space on smaller screens */
+}
+
+.form-container {
+  background-color: rgba(255, 255, 255, 0.95); /* Slight transparency can soften the background */
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #28a745; /* Matches the green theme from your JS cart */
+}
+
+.form-label {
+  font-weight: 500;
+  color: #555;
+}
+
+.form-control,
+.form-select {
+  height: 45px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc; /* subtle border for inputs */
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+  outline: none;
+}
+
+.btn {
+  font-size: 16px;
+  height: 45px;
+  font-weight: 700;
+  background-color: #28a745;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: #19692c;
+  outline: none;
+}
