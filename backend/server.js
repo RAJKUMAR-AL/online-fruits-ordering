@@ -2,11 +2,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+// Serve static files from frontend directory
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 // ---------- MONGODB CONNECTION ----------
 
@@ -52,8 +56,13 @@ mongoose.connect(MONGO_URI)
 
 // ---------- ROUTES ----------
 
-// Test route
+// Serve the main page
 app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/r1.html"));
+});
+
+// Test route
+app.get("/api", (req, res) => {
   res.send("API Working ✔️");
 });
 
