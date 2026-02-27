@@ -1,0 +1,18 @@
+{
+  "name": "online-fruits-ordering",
+  "version": "1.0.0",
+  "description": "Online Fruits Ordering System",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mongoose": "^9.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

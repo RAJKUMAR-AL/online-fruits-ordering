@@ -14,8 +14,8 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 
 // ---------- MONGODB CONNECTION ----------
 
-const MONGO_URI = "mongodb://localhost:27017/fruit_store";
-// This matches what you see in Compass: localhost:27017, DB: fruit_store
+const MONGO_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/fruit_store";
+// For production, use environment variable. For local: localhost:27017, DB: fruit_store
 
 // Define schema & model here (collection: items)
 const itemSchema = new mongoose.Schema({
@@ -38,21 +38,25 @@ const itemSchema = new mongoose.Schema({
 // 3rd argument "items" forces collection name to be exactly "items"
 const Item = mongoose.model("Item", itemSchema, "items");
 
-// Connect to Mongo and start server ONLY after successful connection
+// Connect to Mongo
 mongoose.connect(MONGO_URI)
-
   .then(() => {
     console.log("✅ Connected to MongoDB: fruit_store");
-
-    const PORT = 5000;
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running at http://localhost:${PORT}`);
-    });
   })
   .catch((err) => {
     console.error("❌ Failed to connect to MongoDB:", err.message);
-    process.exit(1); // stop app if DB connection fails
   });
+
+// For local development
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running at http://localhost:${PORT}`);
+  });
+}
+
+// Export for Vercel
+module.exports = app;
 
 // ---------- ROUTES ----------
 
