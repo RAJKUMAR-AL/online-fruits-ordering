@@ -1,4 +1,5 @@
 // server.js
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -15,7 +16,6 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 // ---------- MONGODB CONNECTION ----------
 
 const MONGO_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/fruit_store";
-// For production, use environment variable. For local: localhost:27017, DB: fruit_store
 
 // Define schema & model here (collection: items)
 const itemSchema = new mongoose.Schema({
@@ -47,15 +47,11 @@ mongoose.connect(MONGO_URI)
     console.error("❌ Failed to connect to MongoDB:", err.message);
   });
 
-// For local development
-if (process.env.NODE_ENV !== 'production') {
-  const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => {
-    console.log(`🚀 Server running at http://localhost:${PORT}`);
-  });
-}
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
+});
 
-// Export for Vercel
 module.exports = app;
 
 // ---------- ROUTES ----------
