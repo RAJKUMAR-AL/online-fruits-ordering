@@ -154,7 +154,7 @@
 
         console.log("📤 Sending order with cart to backend:", orderData);
 
-        fetch("http://localhost:5000/place-order", {
+        fetch("/place-order", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(orderData)
