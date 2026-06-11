@@ -157,12 +157,7 @@
 
         console.log("📤 Sending order with cart to backend:", orderData);
 
-        // Use relative URL so it works on both localhost and Render
-        const API_URL = window.location.hostname === "localhost"
-          ? "http://localhost:5000/place-order"
-          : "/place-order";
-
-        fetch(API_URL, {
+        fetch("https://fruitstore-backend-tamo.onrender.com/place-order", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(orderData)
