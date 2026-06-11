@@ -1,5 +1,32 @@
 const cart = {};
 
+// --- Toast notification ---
+const toast = document.createElement('div');
+toast.style.cssText = `
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #28a745;
+  color: white;
+  padding: 10px 24px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 99999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+`;
+document.body.appendChild(toast);
+
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.style.opacity = '1';
+  setTimeout(() => { toast.style.opacity = '0'; }, 2000);
+}
+
 // --- View Cart Button (top-right) ---
 const viewCartBtn = document.createElement('button');
 viewCartBtn.id = 'viewCartBtn';
@@ -59,7 +86,7 @@ modal.innerHTML = `
 `;
 document.body.appendChild(modal);
 
-// --- Toggle modal on View Cart click ---
+// --- Toggle modal ---
 viewCartBtn.addEventListener('click', () => {
   modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
 });
@@ -94,8 +121,7 @@ function updateCartUI() {
     const li = document.createElement('li');
     li.style.cssText = 'display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:14px;';
     li.innerHTML = `
-      <span>${item.name} x${item.qty}</span>
-      <span>₹${itemTotal}</span>
+      <span>${item.name} x${item.qty} — ₹${itemTotal}</span>
     `;
 
     const removeBtn = document.createElement('button');
@@ -114,16 +140,17 @@ function updateCartUI() {
   viewCartBtn.textContent = `🛒 View Cart (${count})`;
 }
 
-// --- Add to cart buttons ---
+// --- Add to cart on Buy Now click ---
 document.querySelectorAll('.btn-success.btn-sm').forEach(btn => {
   btn.addEventListener('click', e => {
-    e.preventDefault();
+    e.preventDefault(); // stop navigation to r2.html
     const card = btn.closest('.product-card');
     if (!card) return;
-    const name = card.querySelector('.card-title').textContent;
+    const name = card.querySelector('.card-title').textContent.trim();
     const price = Number(card.querySelector('.card-text').textContent.replace(/[^0-9.]/g, ''));
     if (!cart[name]) cart[name] = { name, price, qty: 1 };
     else cart[name].qty++;
     updateCartUI();
+    showToast(`✅ ${name} added to cart!`);
   });
 });
